@@ -38,7 +38,7 @@ app.use("/profile/pics",express.static("./profile-pics"));
 
 const io = new Server(server,{
     cors:{
-        origin:"http://localhost:3000",
+        origin:"https://stately-chimera-270c28.netlify.app/",
         methods:["GET","POST"]
     }
 });
