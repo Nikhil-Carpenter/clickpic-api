@@ -1,8 +1,12 @@
 const express = require("express");
+require("dotenv").config();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const http = require("http");
 const {Server} = require("socket.io");
+let port = process.env.PORT || 8000;
+
+// console.log(process.env.PORT)
 
 const app = express();
 
@@ -15,6 +19,7 @@ const postRouter = require("./routes/post")
 const connectionRouter = require("./routes/connection")
 const chatRouter = require("./routes/chat");
 const chatModel = require("./models/chat-model");
+// const e = require("express");
 
 // Middleware setup
 app.use(express.json());
@@ -82,7 +87,7 @@ io.on("connection",(socket)=>{
 
 
 // Setting up database
-mongoose.connect("mongodb://localhost:27017/clickpic")
+mongoose.connect("mongodb+srv://nikhilcarpenter:Mongodbatlas07pass@cluster0.zo6wkso.mongodb.net/clickpic",{useNewUrlParser:true})
 .then(()=>{
     console.log("Database connected successfully")
 })
@@ -91,6 +96,6 @@ mongoose.connect("mongodb://localhost:27017/clickpic")
 
 
 // Setting up backend api Server
-server.listen(8000,()=>{
-    console.log("Server is up and running");
+server.listen(port,()=>{
+    console.log(`Server is up and running on ${port}`);
 })
